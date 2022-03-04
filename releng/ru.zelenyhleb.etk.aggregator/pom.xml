@@ -18,6 +18,7 @@
 		<module>..\..\bundles\ru.zelenyhleb.etk</module>
 		<module>..\..\bundles\ru.zelenyhleb.etk.core</module>
 		<module>..\..\bundles\ru.zelenyhleb.etk.ui</module>
+		<module>..\..\bundles\ru.zelenyhleb.etk.templates</module>
 
 	</modules>
 
