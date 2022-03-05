@@ -20,6 +20,7 @@ import ru.zelenyhleb.etk.core.base.generation.SettingsGenerator;
 public final class CreateBundleWizard extends Wizard implements INewWizard {
 
 	private final LocationPage locationPage = new LocationPage();
+	private final ConfigurationPage configurationPage = new ConfigurationPage();
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -41,6 +42,7 @@ public final class CreateBundleWizard extends Wizard implements INewWizard {
 	@Override
 	public void addPages() {
 		addPage(locationPage);
+		addPage(configurationPage);
 	}
 
 }
