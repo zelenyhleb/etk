@@ -11,5 +11,5 @@ public interface BundleConfiguration {
 	String version();
 
 	String copyright(CopyrightFormat format);
-
+	
 }

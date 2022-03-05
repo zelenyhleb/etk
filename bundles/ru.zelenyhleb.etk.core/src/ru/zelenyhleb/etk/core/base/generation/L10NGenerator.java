@@ -40,4 +40,14 @@ public final class L10NGenerator implements Generator {
 				configuration.copyright(new PropertiesCopyright()), configuration.vendor(), configuration.display());
 	}
 
+	@Override
+	public String name() {
+		return "OSGI-INF"; //$NON-NLS-1$
+	}
+
+	@Override
+	public boolean enabledByDefault() {
+		return true;
+	}
+
 }

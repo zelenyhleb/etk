@@ -1,8 +1,5 @@
 package ru.zelenyhleb.etk.ui.wizards.bundle;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -10,17 +7,16 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-import ru.zelenyhleb.etk.core.api.BundleConfiguration;
-import ru.zelenyhleb.etk.core.api.Generator;
 import ru.zelenyhleb.etk.core.base.BaseBundleConfiguration;
 import ru.zelenyhleb.etk.core.base.CreateProjectOperation;
-import ru.zelenyhleb.etk.core.base.generation.L10NGenerator;
-import ru.zelenyhleb.etk.core.base.generation.SettingsGenerator;
+import ru.zelenyhleb.etk.core.heuristic.QualifiedName;
 
 public final class CreateBundleWizard extends Wizard implements INewWizard {
 
 	private final LocationPage locationPage = new LocationPage();
-	private final ConfigurationPage configurationPage = new ConfigurationPage();
+	private final ConfigurationPage configurationPage = new ConfigurationPage(
+			() -> new QualifiedName(locationPage.getProjectName()));
+	private final GenerationPage generationPage = new GenerationPage();
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -29,20 +25,30 @@ public final class CreateBundleWizard extends Wizard implements INewWizard {
 
 	@Override
 	public boolean performFinish() {
-		BundleConfiguration configuration = new BaseBundleConfiguration(locationPage.getProjectName(), "name", "vendor", "copyright", "version"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$
 		IPath locationPath = locationPage.getLocationPath();
-		Job.create("cet", new CreateProjectOperation(configuration, locationPath, generators())).schedule(); //$NON-NLS-1$
+		Job.create("cet", new CreateProjectOperation(configuration(), locationPath, generationPage.enabledGenerators())).schedule(); //$NON-NLS-1$
 		return true;
 	}
 
-	private List<Generator> generators() {
-		return Arrays.asList(new SettingsGenerator(), new L10NGenerator());
+	private BaseBundleConfiguration configuration() {
+		return new BaseBundleConfiguration( //
+				locationPage.getProjectName(), //
+				configurationPage.displayName(), //
+				configurationPage.vendor(), //
+				configurationPage.copyright(), //
+				configurationPage.version());
 	}
 
 	@Override
 	public void addPages() {
 		addPage(locationPage);
 		addPage(configurationPage);
+		addPage(generationPage);
+	}
+
+	@Override
+	public boolean canFinish() {
+		return locationPage.isPageComplete() && configurationPage.isPageComplete() && generationPage.isPageComplete();
 	}
 
 }

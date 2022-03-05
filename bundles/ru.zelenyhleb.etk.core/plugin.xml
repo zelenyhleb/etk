@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="ru.zelenyhleb.etk.generators" name="%extension.generators.name" schema="schema/ru.zelenyhleb.etk.generators.exsd"/>
+   <extension
+         point="ru.zelenyhleb.etk.generators">
+         <generator id="ru.zelenyhleb.etk.core.generators.l10n" class="ru.zelenyhleb.etk.core.base.generation.L10NGenerator"/>
+         <generator id="ru.zelenyhleb.etk.core.generators.settings" class="ru.zelenyhleb.etk.core.base.generation.SettingsGenerator"/>
+   </extension>
+</plugin>

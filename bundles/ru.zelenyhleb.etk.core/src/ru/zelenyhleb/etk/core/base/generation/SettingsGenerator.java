@@ -48,4 +48,14 @@ public final class SettingsGenerator implements Generator {
 		}
 	}
 
+	@Override
+	public String name() {
+		return "Default settings"; //$NON-NLS-1$
+	}
+
+	@Override
+	public boolean enabledByDefault() {
+		return true;
+	}
+
 }

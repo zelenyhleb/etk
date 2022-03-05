@@ -6,5 +6,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public interface Generator {
 
 	void generate(IProject project, BundleConfiguration configuration, IProgressMonitor monitor);
+	
+	String name();
+	
+	boolean enabledByDefault();
 
 }
