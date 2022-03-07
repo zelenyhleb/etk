@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 public final class QualifiedName {
 
+	private static final String SPACE = " "; //$NON-NLS-1$
 	private final String[] segments;
 	private final DefaultConfiguration configuration;
 
@@ -22,18 +23,21 @@ public final class QualifiedName {
 		if (segments.length <= 1)
 			return configuration.display();
 		else if (segments.length < 3)
-			return Stream.of(segments).map(this::capitalize).collect(Collectors.joining(" ")); //$NON-NLS-1$
+			return Stream.of(segments).map(this::capitalize).collect(Collectors.joining(SPACE));
 		else
 			return Stream.of(Arrays.copyOfRange(segments, 2, segments.length)) //
 					.map(this::capitalize) //
-					.collect(Collectors.joining(" ")); //$NON-NLS-1$
+					.collect(Collectors.joining(SPACE));
 	}
 
 	public String vendor() {
-		if (segments.length < 2)
+		if (segments.length >= 2) {
+			return capitalize(segments[1]) //
+					.concat(SPACE) //
+					.concat(new VendorSuffix().apply(segments[0]));
+		} else {
 			return configuration.vendor();
-		else
-			return capitalize(segments[1]);
+		}
 	}
 
 	private String capitalize(String raw) {

@@ -6,5 +6,9 @@
          point="ru.zelenyhleb.etk.generators">
          <generator id="ru.zelenyhleb.etk.core.generators.l10n" class="ru.zelenyhleb.etk.core.base.generation.L10NGenerator"/>
          <generator id="ru.zelenyhleb.etk.core.generators.settings" class="ru.zelenyhleb.etk.core.base.generation.SettingsGenerator"/>
+         <generator
+               class="ru.zelenyhleb.etk.core.base.generation.JavaProjectGenerator"
+               id="ru.zelenyhleb.etk.core.generators.classpath">
+         </generator>
    </extension>
 </plugin>

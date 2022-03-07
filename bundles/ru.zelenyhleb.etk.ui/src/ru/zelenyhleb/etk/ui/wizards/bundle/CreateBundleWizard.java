@@ -36,7 +36,7 @@ public final class CreateBundleWizard extends Wizard implements INewWizard {
 				configurationPage.displayName(), //
 				configurationPage.vendor(), //
 				configurationPage.copyright(), //
-				configurationPage.version());
+								configurationPage.version());
 	}
 
 	@Override
