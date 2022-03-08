@@ -37,7 +37,7 @@ public final class JavaProjectGenerator implements Generator {
 
 	@Override
 	public String name() {
-		return ".classpath file"; //$NON-NLS-1$
+		return "Java Project"; //$NON-NLS-1$
 	}
 
 	@Override

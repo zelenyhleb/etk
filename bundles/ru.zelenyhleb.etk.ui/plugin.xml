@@ -7,30 +7,12 @@
             id="ru.zelenyhleb.etk.ui.commands.category"
             name="%commands.category">
       </category>
-      <command
-            defaultHandler="ru.zelenyhleb.etk.ui.ConvertHandler"
-            id="ru.zelenyhleb.etk.ui.commands.convert"
-            name="%commands.convert">
-      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
             locationURI="popup:org.eclipse.ui.popup.any">
-         <command
-               commandId="ru.zelenyhleb.etk.ui.commands.convert"
-               style="push">
-            <visibleWhen
-                  checkEnabled="false">
-               <iterate
-                     operator="or">
-                  <instanceof
-                        value="org.eclipse.core.resources.IProject">
-                  </instanceof>
-               </iterate>
-            </visibleWhen>
-         </command>
       </menuContribution>
    </extension>
    <extension
