@@ -15,6 +15,9 @@
 		Nikifor Fedorov - initial API and implementation
 -->
 <site>
+   <feature id="ru.zelenyhleb.etk.feature">
+      <category name="ru.zelenyhleb.etk.category"/>
+   </feature>
    <category-def name="ru.zelenyhleb.etk.category" label="Eclipse ToolKit"/>
    <category-def name="ru.zelenyhleb.etk.category.source" label="Eclipse ToolKit Source"/>
 </site>
