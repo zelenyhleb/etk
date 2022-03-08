@@ -36,9 +36,11 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
 
 import ru.zelenyhleb.etk.core.heuristic.QualifiedName;
+import ru.zelenyhleb.etk.preferences.core.Preferences;
 import ru.zelenyhleb.etk.ui.Messages;
 
 public final class ConfigurationPage extends WizardPage implements IPageChangedListener {
@@ -47,7 +49,9 @@ public final class ConfigurationPage extends WizardPage implements IPageChangedL
 	private Text version;
 	private Text vendor;
 	private Text copyright;
+	private Link changePreference;
 	private final ModifyListener validate = e -> validate();
+	private final ModifyListener changeVisibility = e -> changeVisibility();
 	private final Supplier<IFieldData> data;
 
 	public ConfigurationPage(Supplier<IFieldData> data) {
@@ -80,10 +84,17 @@ public final class ConfigurationPage extends WizardPage implements IPageChangedL
 		grab.span(2, 1).applyTo(vendor);
 		Label copyrightLabel = new Label(configuration, SWT.NONE);
 		copyrightLabel.setText(Messages.ConfigurationPage_copyrightLabel);
-		copyright = new Text(configuration, SWT.MULTI | SWT.BORDER);
+		copyright = new Text(configuration, SWT.MULTI | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		copyright.addModifyListener(changeVisibility);
 		Button generate = new Button(configuration, SWT.PUSH);
 		generate.setText(Messages.ConfigurationPage_label_generate);
 		generate.addListener(SWT.Selection, e -> generate());
+		changePreference = new Link(configuration, SWT.NONE);
+		changePreference.setText(Messages.ConfigurationPage_label_changePreference);
+		changePreference.addListener(SWT.Selection, e -> updatePreference());
+		changePreference.setVisible(false);
+		changePreference.setEnabled(false);
+		grab.span(2, 1).applyTo(changePreference);
 		grab.grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(configuration);
 		grab.applyTo(copyright);
 		setControl(container);
@@ -107,7 +118,11 @@ public final class ConfigurationPage extends WizardPage implements IPageChangedL
 	}
 
 	public String copyright() {
-		return extractText(copyright, ""); //$NON-NLS-1$
+		return extractText(copyright, storedCopyright());
+	}
+
+	private String storedCopyright() {
+		return new Preferences().copyright().get();
 	}
 
 	private String extractText(Text text, String other) {
@@ -119,6 +134,22 @@ public final class ConfigurationPage extends WizardPage implements IPageChangedL
 		displayName.setText(heuristic.name());
 		vendor.setText(heuristic.vendor());
 		version.setText(heuristic.version());
+		copyright.setText(storedCopyright());
+	}
+
+	private void changeVisibility() {
+		if (!copyright.getText().equals(new Preferences().copyright().get())) {
+			changePreference.setVisible(true);
+			changePreference.setEnabled(true);
+		} else {
+			changePreference.setVisible(false);
+			changePreference.setEnabled(false);
+		}
+	}
+
+	private void updatePreference() {
+		new Preferences().copyright().set(copyright.getText());
+		changeVisibility();
 	}
 
 	private void validate() {
@@ -145,6 +176,7 @@ public final class ConfigurationPage extends WizardPage implements IPageChangedL
 			displayName.setText(displayName());
 			version.setText(version());
 			vendor.setText(vendor());
+			copyright.setText(storedCopyright());
 		}
 	}
 

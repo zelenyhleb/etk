@@ -18,25 +18,17 @@
  * Contributors:
  *     Nikifor Fedorov - initial API and implementation
  *******************************************************************************/
-package ru.zelenyhleb.etk.ui;
+package ru.zelenyhleb.etk.preferences;
 
 import org.eclipse.osgi.util.NLS;
 
 public final class Messages extends NLS {
 
-	private static final String BUNDLE_NAME = "ru.zelenyhleb.etk.ui.messages"; //$NON-NLS-1$
-	public static String BaseBundleTemplate_label;
-	public static String BaseBundleTemplate_description;
-	public static String ConfigurationPage_groupLabel;
-	public static String ConfigurationPage_displayNameLabel;
-	public static String ConfigurationPage_versionLabel;
-	public static String ConfigurationPage_vendorLabel;
-	public static String ConfigurationPage_copyrightLabel;
-	public static String ConfigurationPage_label_generate;
-	public static String ConfigurationPage_label_changePreference;
-	public static String ConfigurationPage_e_emptyName;
-	public static String ConfigurationPage_e_emptyVendor;
-	public static String ConfigurationPage_w_emptyVersion;
+	private static final String BUNDLE_NAME = "ru.zelenyhleb.etk.preferences.messages"; //$NON-NLS-1$
+
+	public static String CopyrightPreferencePage_label_description;
+	public static String CopyrightPreferencePage_label_copyright;
+	public static String PreferenceInitializer_copyright_default;
 
 	static {
 		// initialize resource bundle
