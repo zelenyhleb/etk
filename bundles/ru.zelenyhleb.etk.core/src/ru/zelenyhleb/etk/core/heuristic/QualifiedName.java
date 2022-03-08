@@ -60,6 +60,10 @@ public final class QualifiedName {
 		}
 	}
 
+	public String version() {
+		return Messages.QualifiedName_defaultBundleVersion;
+	}
+
 	private String capitalize(String raw) {
 		String first = String.valueOf(raw.charAt(0));
 		return raw.replaceFirst(first, first.toUpperCase());

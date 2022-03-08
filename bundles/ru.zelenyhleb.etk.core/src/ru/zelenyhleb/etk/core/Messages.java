@@ -27,6 +27,7 @@ public final class Messages extends NLS {
 	private static final String BUNDLE_NAME = "ru.zelenyhleb.etk.core.messages"; //$NON-NLS-1$
 	public static String QualifiedName_defaultBundleName;
 	public static String QualifiedName_defaultBundleVendor;
+	public static String QualifiedName_defaultBundleVersion;
 	
 	
 	static {

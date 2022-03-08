@@ -32,6 +32,7 @@ public final class Messages extends NLS {
 	public static String ConfigurationPage_versionLabel;
 	public static String ConfigurationPage_vendorLabel;
 	public static String ConfigurationPage_copyrightLabel;
+	public static String ConfigurationPage_label_generate;
 	public static String ConfigurationPage_e_emptyName;
 	public static String ConfigurationPage_e_emptyVendor;
 	public static String ConfigurationPage_w_emptyVersion;

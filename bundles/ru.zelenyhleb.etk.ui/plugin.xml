@@ -51,6 +51,9 @@
             rcp="false"
             requiresActivator="false"
             ui-content="false">
+         <description>
+            %template.base.description
+         </description>
       </wizard>
    </extension>
 </plugin>

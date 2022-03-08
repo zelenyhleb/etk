@@ -32,11 +32,13 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.pde.ui.IFieldData;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import ru.zelenyhleb.etk.core.heuristic.QualifiedName;
 import ru.zelenyhleb.etk.ui.Messages;
 
 public final class ConfigurationPage extends WizardPage implements IPageChangedListener {
@@ -79,6 +81,9 @@ public final class ConfigurationPage extends WizardPage implements IPageChangedL
 		Label copyrightLabel = new Label(configuration, SWT.NONE);
 		copyrightLabel.setText(Messages.ConfigurationPage_copyrightLabel);
 		copyright = new Text(configuration, SWT.MULTI | SWT.BORDER);
+		Button generate = new Button(configuration, SWT.PUSH);
+		generate.setText(Messages.ConfigurationPage_label_generate);
+		generate.addListener(SWT.Selection, e -> generate());
 		grab.grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(configuration);
 		grab.applyTo(copyright);
 		setControl(container);
@@ -107,6 +112,13 @@ public final class ConfigurationPage extends WizardPage implements IPageChangedL
 
 	private String extractText(Text text, String other) {
 		return Optional.ofNullable(text).map(Text::getText).filter(s -> !s.isEmpty()).orElse(other);
+	}
+
+	private void generate() {
+		QualifiedName heuristic = new QualifiedName(data.get().getId());
+		displayName.setText(heuristic.name());
+		vendor.setText(heuristic.vendor());
+		version.setText(heuristic.version());
 	}
 
 	private void validate() {
