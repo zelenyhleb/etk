@@ -28,12 +28,12 @@ import ru.zelenyhleb.etk.core.api.PropertyFormat;
 public final class Formatters {
 
 	private final List<PropertyFormat> copyrights = Arrays.asList(new PropertiesCopyright());
-	private final List<PropertyFormat> versions = Arrays.asList(new SemanticVersionFormat());
-	
+	private final List<PropertyFormat> versions = Arrays.asList();
+
 	public PropertyFormat copyright(String extension) {
 		return copyrights.stream().filter(f -> f.extension().equals(extension)).findAny().orElse(new BlankFormat());
 	}
-	
+
 	public PropertyFormat version(String extension) {
 		return versions.stream().filter(f -> f.extension().equals(extension)).findAny().orElse(new SameFormat());
 	}

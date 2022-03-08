@@ -35,6 +35,7 @@
       <template
             class="ru.zelenyhleb.etk.ui.templates.BaseBundleTemplate"
             contributingId="ru.zelenyhleb.etk.ui"
+            icon="platform:/plugin/org.eclipse.pde.ui/icons/etool16/newpprj_wiz.png"
             id="ru.zelenyhleb.etk.ui.templates.base"
             name="%template.base.name">
       </template>
@@ -51,6 +52,9 @@
             rcp="false"
             requiresActivator="false"
             ui-content="false">
+         <description>
+            %template.base.description
+         </description>
       </wizard>
    </extension>
 </plugin>

@@ -23,13 +23,11 @@ package ru.zelenyhleb.etk.ui.templates;
 import org.eclipse.pde.ui.templates.ITemplateSection;
 import org.eclipse.pde.ui.templates.NewPluginTemplateWizard;
 
-import ru.zelenyhleb.etk.core.heuristic.QualifiedName;
-
 public final class BaseBundleWizard extends NewPluginTemplateWizard {
 
 	@Override
 	public ITemplateSection[] createTemplateSections() {
-		return new ITemplateSection[] { new BaseBundleTemplate(() -> new QualifiedName(getData().getId())) };
+		return new ITemplateSection[] { new BaseBundleTemplate(this::getData) };
 	}
 
 }
