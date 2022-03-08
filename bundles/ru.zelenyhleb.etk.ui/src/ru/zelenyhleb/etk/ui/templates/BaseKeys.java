@@ -37,5 +37,13 @@ public final class BaseKeys {
 	public String javaVersion() {
 		return "java-version"; //$NON-NLS-1$
 	}
+	
+	public String srcFolder() {
+		return "src-name"; //$NON-NLS-1$
+	}
+	
+	public String binFolder() {
+		return "bin-name"; //$NON-NLS-1$
+	}
 
 }

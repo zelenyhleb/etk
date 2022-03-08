@@ -45,10 +45,12 @@ public final class BaseBundleTemplate extends AbstractTemplateSection {
 
 	private final ConfigurationPage configuration;
 	private final Supplier<String> javaVersion;
+	private final Supplier<IFieldData> data;
 
 	@SuppressWarnings("deprecation")
 	public BaseBundleTemplate(Supplier<IFieldData> data) {
 		configuration = new ConfigurationPage(data);
+		this.data = data;
 		this.javaVersion = () -> getManifestHeader(Constants.BUNDLE_REQUIREDEXECUTIONENVIRONMENT).split("-")[1]; //$NON-NLS-1$
 	}
 
@@ -101,14 +103,19 @@ public final class BaseBundleTemplate extends AbstractTemplateSection {
 
 	@Override
 	public String getReplacementString(String fileName, String key) {
-		if (new BaseKeys().name().equals(key)) {
+		BaseKeys keys = new BaseKeys();
+		if (keys.name().equals(key)) {
 			return configuration.displayName();
-		} else if (new BaseKeys().vendor().equals(key)) {
+		} else if (keys.vendor().equals(key)) {
 			return configuration.vendor();
-		} else if (new BaseKeys().copyright().equals(key)) {
+		} else if (keys.copyright().equals(key)) {
 			return new Formatters().copyright(extractExtension(fileName)).apply(configuration.copyright());
-		} else if (new BaseKeys().javaVersion().equals(key)) {
+		} else if (keys.javaVersion().equals(key)) {
 			return javaVersion.get();
+		} else if (keys.srcFolder().equals(key)) {
+			return data.get().getSourceFolderName();
+		} else if (keys.binFolder().equals(key)) {
+			return data.get().getOutputFolderName();
 		}
 		return super.getReplacementString(fileName, key);
 	}
