@@ -33,11 +33,12 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.pde.core.plugin.IPluginReference;
+import org.eclipse.pde.ui.IFieldData;
 import org.eclipse.pde.ui.templates.AbstractTemplateSection;
 import org.osgi.framework.Constants;
 
 import ru.zelenyhleb.etk.core.base.Formatters;
-import ru.zelenyhleb.etk.core.heuristic.QualifiedName;
+import ru.zelenyhleb.etk.ui.Messages;
 import ru.zelenyhleb.etk.ui.wizards.bundle.ConfigurationPage;
 
 public final class BaseBundleTemplate extends AbstractTemplateSection {
@@ -46,14 +47,19 @@ public final class BaseBundleTemplate extends AbstractTemplateSection {
 	private final Supplier<String> javaVersion;
 
 	@SuppressWarnings("deprecation")
-	public BaseBundleTemplate(Supplier<QualifiedName> name) {
-		configuration = new ConfigurationPage(name);
+	public BaseBundleTemplate(Supplier<IFieldData> data) {
+		configuration = new ConfigurationPage(data);
 		this.javaVersion = () -> getManifestHeader(Constants.BUNDLE_REQUIREDEXECUTIONENVIRONMENT).split("-")[1]; //$NON-NLS-1$
 	}
 
 	@Override
 	public String getLabel() {
-		return "Generate a base bundle"; //$NON-NLS-1$
+		return Messages.BaseBundleTemplate_label;
+	}
+
+	@Override
+	public String getDescription() {
+		return Messages.BaseBundleTemplate_description;
 	}
 
 	@Override

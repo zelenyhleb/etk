@@ -18,16 +18,23 @@
  * Contributors:
  *     Nikifor Fedorov - initial API and implementation
  *******************************************************************************/
-package ru.zelenyhleb.etk.ui.templates;
+package ru.zelenyhleb.etk.core;
 
-import org.eclipse.pde.ui.templates.ITemplateSection;
-import org.eclipse.pde.ui.templates.NewPluginTemplateWizard;
+import org.eclipse.osgi.util.NLS;
 
-public final class BaseBundleWizard extends NewPluginTemplateWizard {
+public final class Messages extends NLS {
+	
+	private static final String BUNDLE_NAME = "ru.zelenyhleb.etk.core.messages"; //$NON-NLS-1$
+	public static String QualifiedName_defaultBundleName;
+	public static String QualifiedName_defaultBundleVendor;
+	
+	
+	static {
+		// initialize resource bundle
+		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
+	}
 
-	@Override
-	public ITemplateSection[] createTemplateSections() {
-		return new ITemplateSection[] { new BaseBundleTemplate(this::getData) };
+	private Messages() {
 	}
 
 }

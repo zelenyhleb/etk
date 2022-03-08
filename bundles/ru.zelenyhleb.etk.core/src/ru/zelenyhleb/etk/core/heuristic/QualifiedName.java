@@ -24,6 +24,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import ru.zelenyhleb.etk.core.Messages;
+
 public final class QualifiedName {
 
 	private static final String SPACE = " "; //$NON-NLS-1$
@@ -39,7 +41,7 @@ public final class QualifiedName {
 
 	public String name() {
 		if (segments.length <= 1)
-			return "Awesome Bundle"; //$NON-NLS-1$
+			return Messages.QualifiedName_defaultBundleName;
 		else if (segments.length < 3)
 			return Stream.of(segments).map(this::capitalize).collect(Collectors.joining(SPACE));
 		else
@@ -54,7 +56,7 @@ public final class QualifiedName {
 					.concat(SPACE) //
 					.concat(new VendorSuffix().apply(segments[0]));
 		} else {
-			return "You"; //$NON-NLS-1$
+			return Messages.QualifiedName_defaultBundleVendor;
 		}
 	}
 

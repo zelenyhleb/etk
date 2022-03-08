@@ -18,20 +18,30 @@
  * Contributors:
  *     Nikifor Fedorov - initial API and implementation
  *******************************************************************************/
-package ru.zelenyhleb.etk.core.base;
+package ru.zelenyhleb.etk.ui;
 
-import ru.zelenyhleb.etk.core.api.PropertyFormat;
+import org.eclipse.osgi.util.NLS;
 
-public final class SemanticVersionFormat implements PropertyFormat {
+public final class Messages extends NLS {
 
-	@Override
-	public String apply(String raw) {
-		return raw.concat(".qualifier"); //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "ru.zelenyhleb.etk.ui.messages"; //$NON-NLS-1$
+	public static String BaseBundleTemplate_label;
+	public static String BaseBundleTemplate_description;
+	public static String ConfigurationPage_groupLabel;
+	public static String ConfigurationPage_displayNameLabel;
+	public static String ConfigurationPage_versionLabel;
+	public static String ConfigurationPage_vendorLabel;
+	public static String ConfigurationPage_copyrightLabel;
+	public static String ConfigurationPage_e_emptyName;
+	public static String ConfigurationPage_e_emptyVendor;
+	public static String ConfigurationPage_w_emptyVersion;
+
+	static {
+		// initialize resource bundle
+		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}
 
-	@Override
-	public String extension() {
-		return "MF"; //$NON-NLS-1$
+	private Messages() {
 	}
 
 }
