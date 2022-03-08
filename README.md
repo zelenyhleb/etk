@@ -1,5 +1,5 @@
 # Eclipse Tool Kit
-[![Build Status](https://github.com/zelenyhleb/etk/CI/badge.svg)](https://github.com/zelenyhleb/etk/actions)
+[![Build Status](https://github.com/zelenyhleb/etk/actions/workflows/ci.yml/badge.svg)](https://github.com/zelenyhleb/etk/actions)
 
 A set of useful things for eclipse plugin development
 
